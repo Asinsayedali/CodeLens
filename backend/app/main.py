@@ -8,7 +8,8 @@ from app.config import settings
 app = FastAPI(
     title=settings.app_name,
     version=settings.app_version,
-    description="Intelligent Repository Analysis Platform"
+    description="Intelligent Repository Analysis Platform",
+    redirect_slashes=False,
 )
 
 # Configure CORS — wildcard is fine for a hackathon demo
