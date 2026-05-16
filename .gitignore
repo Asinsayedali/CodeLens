@@ -40,8 +40,7 @@ venv.bak/
 .env
 .env.local
 
-# Database
-*.db
+# Database — codelens.db is intentionally committed (pre-seeded demo data)
 *.sqlite
 *.sqlite3
 
@@ -81,7 +80,6 @@ Thumbs.db
 .DS_Store
 
 # Project specific
-codelens.db
 analyzed_repos/
 temp_repos/
 
