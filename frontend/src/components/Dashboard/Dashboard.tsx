@@ -70,7 +70,7 @@ export default function Dashboard() {
       <header className="bg-gray-950 border-b border-gray-800 px-6 py-3 flex-shrink-0">
         <div className="max-w-5xl mx-auto flex items-center justify-between">
           <Link to="/" className="text-lg font-bold tracking-tight text-gradient-primary hover:opacity-80 transition-opacity">
-            CodeLens
+            Grasp
           </Link>
           <button
             onClick={() => setShowNewProjectForm(v => !v)}

@@ -52,7 +52,7 @@ export default function ProjectLayout() {
               to="/dashboard"
               className="text-lg font-bold tracking-tight text-gradient-primary hover:opacity-80 transition-opacity flex-shrink-0"
             >
-              CodeLens
+              Grasp
             </Link>
             <span className="text-gray-700 flex-shrink-0">/</span>
             <span className="text-gray-400 text-sm font-medium truncate">{project?.name}</span>

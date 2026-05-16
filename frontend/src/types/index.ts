@@ -1,4 +1,4 @@
-// Type definitions for CodeLens
+// Type definitions for Grasp
 
 export interface Project {
   id: number;

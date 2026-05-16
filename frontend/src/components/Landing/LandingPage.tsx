@@ -18,7 +18,7 @@ export default function LandingPage() {
             <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-sm font-bold shadow-lg shadow-blue-500/20">
               CL
             </div>
-            <span className="text-lg font-bold text-gradient-primary">CodeLens</span>
+            <span className="text-lg font-bold text-gradient-primary">Grasp</span>
           </div>
           <button
             onClick={() => navigate('/dashboard')}
@@ -44,7 +44,7 @@ export default function LandingPage() {
           </h1>
 
           <p className="text-lg text-gray-400 mb-10 leading-relaxed max-w-2xl mx-auto">
-            CodeLens parses your repository, builds a knowledge graph, generates AI documentation,
+            Grasp parses your repository, builds a knowledge graph, generates AI documentation,
             and lets you ask natural-language questions — all in one place.
           </p>
 
@@ -72,7 +72,7 @@ export default function LandingPage() {
               <div className="w-3 h-3 rounded-full bg-red-500/70" />
               <div className="w-3 h-3 rounded-full bg-yellow-500/70" />
               <div className="w-3 h-3 rounded-full bg-green-500/70" />
-              <span className="ml-3 text-xs text-gray-500 font-mono">CodeLens · Graph View</span>
+              <span className="ml-3 text-xs text-gray-500 font-mono">Grasp · Graph View</span>
             </div>
             {/* Content mockup */}
             <div className="p-6 font-mono text-xs space-y-2 text-gray-400">
@@ -173,7 +173,7 @@ export default function LandingPage() {
               {
                 n: 1, color: 'bg-blue-600',
                 title: 'Analyze your repository',
-                desc: 'Paste a local path or GitHub URL. CodeLens parses every file and builds a graph of files, classes, functions, and their relationships.',
+                desc: 'Paste a local path or GitHub URL. Grasp parses every file and builds a graph of files, classes, functions, and their relationships.',
               },
               {
                 n: 2, color: 'bg-purple-600',
@@ -223,7 +223,7 @@ export default function LandingPage() {
             <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-xs font-bold">
               CL
             </div>
-            <span className="text-gray-500 text-sm">CodeLens</span>
+            <span className="text-gray-500 text-sm">Grasp</span>
           </div>
           <p className="text-gray-600 text-sm">Powered by IBM watsonx.ai · Made with Bob</p>
         </div>
