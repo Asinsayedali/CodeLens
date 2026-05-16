@@ -1,8 +1,8 @@
-# 🔍 CodeLens - Intelligent Repository Analysis Platform
+# 🔍 Grasp - Intelligent Repository Analysis Platform
 
 > **Accelerate codebase understanding with AI-powered analysis, interactive visualizations, and intelligent documentation**
 
-CodeLens is a powerful tool that helps developers quickly understand unfamiliar codebases through automated analysis, interactive dependency visualization, and AI-powered documentation generation.
+Grasp is a powerful tool that helps developers quickly understand unfamiliar codebases through automated analysis, interactive dependency visualization, and AI-powered documentation generation.
 
 ---
 
@@ -76,8 +76,8 @@ CodeLens is a powerful tool that helps developers quickly understand unfamiliar 
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/codelens.git
-cd codelens
+git clone https://github.com/yourusername/grasp.git
+cd grasp
 
 # Set up backend
 cd backend
@@ -99,44 +99,34 @@ cp .env.example .env
 
 Create a `.env` file in the project root:
 
-```env
+```env inside backend folder
 # Watsonx.ai Configuration
-WATSONX_API_KEY=your_api_key_here
-WATSONX_PROJECT_ID=your_project_id_here
+WATSONX_API_KEY=<Your-API-KEY>
+WATSONX_PROJECT_ID=<Your-PROJECT-ID>
 WATSONX_URL=https://us-south.ml.cloud.ibm.com
-WATSONX_MODEL_ID=ibm/granite-13b-chat-v2
-
-# Database
-DATABASE_URL=sqlite:///./codelens.db
-
-# Server
-API_HOST=127.0.0.1
-API_PORT=8000
-
-# AI Settings
-MAX_TOKENS=2048
-TEMPERATURE=0.3
+WATSONX_MODEL_ID=ibm/granite-4-h-small
+WATSONX_EMBEDDING_MODEL_ID=ibm/granite-embedding-278m-multilingual
+WATSONX_ANSWERING_MODEL_ID=meta-llama/llama-3-3-70b-instruct
 ```
 
+```env inside front end folder
+VITE_API_URL=http://localhost:8000
+```
 ### Usage
 
 #### CLI Commands
 
 ```bash
-# Analyze a local repository
-codelens analyze /path/to/your/repo
+cd backend && source venv/bin/activate
 
-# Analyze a GitHub repository
-codelens analyze https://github.com/username/repo
+python cli/main.py version          # Show version
+python cli/main.py list             # List all projects
+python cli/main.py init             # Initialize DB
+python cli/main.py analyze /path/to/repo --name "My Project"
+python cli/main.py analyze https://github.com/user/repo
+python cli/main.py delete <project_id>
+python cli/main.py serve --port 8001
 
-# List analyzed projects
-codelens list
-
-# Delete a project
-codelens delete <project_id>
-
-# Start the web server
-codelens serve
 ```
 
 #### Web Dashboard
