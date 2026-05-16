@@ -222,7 +222,7 @@ npm run dev
 - **Database:** SQLite with SQLAlchemy 2.0.23
 - **CLI:** Typer 0.9.0 with Rich 13.7.0
 - **Code Analysis:** Python AST, tree-sitter
-- **AI:** IBM watsonx.ai (Granite models)
+- **AI:** IBM watsonx.ai (Granite models & Llama models)
 - **Testing:** pytest
 
 ### Frontend
@@ -386,11 +386,10 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 🙏 Acknowledgments
 
-- **IBM watsonx.ai** for Granite models
+- **IBM watsonx.ai** for Granite and Llama models
 - **FastAPI** for the excellent web framework
 - **React Flow** for graph visualization
 - **Tree-sitter** for universal code parsing
-- All open-source contributors
 
 ---
 
@@ -401,7 +400,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ---
 
-**Built with ❤️ for developers who want to understand code faster**
+**Built with IBM BOB ❤️ for developers who want to understand code faster**
 
 ---
 
