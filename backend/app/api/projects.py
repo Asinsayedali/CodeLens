@@ -16,7 +16,7 @@ from app.services.analysis_service import AnalysisService
 router = APIRouter()
 
 
-@router.get("/", response_model=List[ProjectResponse])
+@router.get("", response_model=List[ProjectResponse])
 def list_projects(db: Session = Depends(get_db)):
     """List all projects"""
     service = AnalysisService(db)
