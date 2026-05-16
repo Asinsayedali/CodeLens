@@ -147,7 +147,8 @@ class AnalysisService:
             return project
         
         except Exception as e:
-            # Update project status to failed
+            # Rollback whatever partial write failed, then mark project as failed
+            self.db.rollback()
             project.status = 'failed'
             self.db.commit()
             print(f"\n❌ Analysis failed: {e}")

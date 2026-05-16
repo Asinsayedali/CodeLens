@@ -17,13 +17,13 @@ class GraphBuilder:
         self.edges: List[Dict[str, Any]] = []
         self.node_id_map: Dict[str, str] = {}  # entity_key -> node_id
     
-    def _generate_node_id(self, file_path: str, entity_type: str, entity_name: str) -> str:
-        """Generate unique node ID"""
-        return f"{self.project_id}:{file_path}:{entity_type}:{entity_name}"
-    
+    def _generate_node_id(self, file_path: str, entity_type: str, entity_name: str, line: int = 0) -> str:
+        """Generate unique node ID — include line number so same-named symbols in one file don't collide."""
+        return f"{self.project_id}:{file_path}:{entity_type}:{entity_name}:{line}"
+
     def add_file_node(self, file_path: str, language: str, analysis: Dict[str, Any]):
         """Add a file node to the graph"""
-        node_id = self._generate_node_id(file_path, 'file', file_path)
+        node_id = self._generate_node_id(file_path, 'file', file_path, 0)
         
         self.nodes.append({
             'node_id': node_id,
@@ -46,7 +46,7 @@ class GraphBuilder:
     def add_class_node(self, file_path: str, class_info: Dict[str, Any]):
         """Add a class node to the graph"""
         class_name = class_info['name']
-        node_id = self._generate_node_id(file_path, 'class', class_name)
+        node_id = self._generate_node_id(file_path, 'class', class_name, class_info.get('line', 0))
         
         self.nodes.append({
             'node_id': node_id,
@@ -77,7 +77,7 @@ class GraphBuilder:
     def add_function_node(self, file_path: str, func_info: Dict[str, Any]):
         """Add a function node to the graph"""
         func_name = func_info['name']
-        node_id = self._generate_node_id(file_path, 'function', func_name)
+        node_id = self._generate_node_id(file_path, 'function', func_name, func_info.get('line', 0))
         
         self.nodes.append({
             'node_id': node_id,
@@ -128,7 +128,11 @@ class GraphBuilder:
                     node['importance_score'] = scores[file_path]
     
     def save_to_database(self, db: Session):
-        """Save graph to database"""
+        """Save graph to database, replacing any stale data from a previous analysis run."""
+        db.query(GraphEdge).filter(GraphEdge.project_id == self.project_id).delete(synchronize_session=False)
+        db.query(GraphNode).filter(GraphNode.project_id == self.project_id).delete(synchronize_session=False)
+        db.flush()
+
         # Save nodes
         node_objects = []
         for node_data in self.nodes:
