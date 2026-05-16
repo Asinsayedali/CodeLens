@@ -11,11 +11,11 @@ app = FastAPI(
     description="Intelligent Repository Analysis Platform"
 )
 
-# Configure CORS
+# Configure CORS — wildcard is fine for a hackathon demo
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[settings.frontend_url, "http://localhost:5173"],
-    allow_credentials=True,
+    allow_origins=["*"],
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
