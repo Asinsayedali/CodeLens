@@ -69,13 +69,13 @@ export const MermaidDiagram = ({ chart }: MermaidDiagramProps) => {
           Architecture Diagram
         </span>
         {status === 'ok' && (
-          <span className="text-[10px] text-gray-600 bg-gray-900 border border-gray-800 px-2 py-0.5 rounded-full">
+          <span className="text-[10px] text-gray-600 bg-[#111] border border-[#222] px-2 py-0.5 rounded-full">
             Mermaid · flowchart
           </span>
         )}
       </div>
 
-      <div className="relative w-full rounded-xl border border-gray-700/60 bg-[#0f172a] p-6 overflow-x-auto" style={{ minHeight: status !== 'ok' ? '180px' : undefined }}>
+      <div className="relative w-full rounded-xl border border-[#2e2e2e]/60 bg-black p-6 overflow-x-auto" style={{ minHeight: status !== 'ok' ? '180px' : undefined }}>
         {status === 'loading' && (
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="spinner w-6 h-6" />

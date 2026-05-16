@@ -4,7 +4,7 @@ export default function LandingPage() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-gray-950 text-white overflow-x-hidden">
+    <div className="min-h-screen bg-black text-white overflow-x-hidden">
       {/* Ambient glow */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
         <div className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-blue-600/8 rounded-full blur-3xl" />
@@ -12,11 +12,11 @@ export default function LandingPage() {
       </div>
 
       {/* Header */}
-      <header className="relative border-b border-gray-800/60 backdrop-blur-sm sticky top-0 z-10 bg-gray-950/80">
+      <header className="relative border-b border-[#222]/60 backdrop-blur-sm sticky top-0 z-10 bg-black/80">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-sm font-bold shadow-lg shadow-blue-500/20">
-              CL
+              G
             </div>
             <span className="text-lg font-bold text-gradient-primary">Grasp</span>
           </div>
@@ -57,7 +57,7 @@ export default function LandingPage() {
             </button>
             <button
               onClick={() => navigate('/dashboard')}
-              className="px-8 py-3.5 bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-white rounded-xl text-base font-semibold transition-colors border border-gray-700 flex items-center gap-2"
+              className="px-8 py-3.5 bg-[#1c1c1c] hover:bg-[#282828] text-gray-300 hover:text-white rounded-xl text-base font-semibold transition-colors border border-[#2e2e2e] flex items-center gap-2"
             >
               View Projects
             </button>
@@ -66,9 +66,9 @@ export default function LandingPage() {
 
         {/* Fake terminal preview */}
         <div className="mt-16 max-w-3xl mx-auto">
-          <div className="rounded-2xl border border-gray-700/60 bg-gray-900/80 overflow-hidden shadow-2xl shadow-black/40 backdrop-blur-sm">
+          <div className="rounded-2xl border border-[#2e2e2e]/60 bg-[#111]/80 overflow-hidden shadow-2xl shadow-black/40 backdrop-blur-sm">
             {/* Window chrome */}
-            <div className="flex items-center gap-2 px-4 py-3 border-b border-gray-800 bg-gray-900">
+            <div className="flex items-center gap-2 px-4 py-3 border-b border-[#222] bg-[#111]">
               <div className="w-3 h-3 rounded-full bg-red-500/70" />
               <div className="w-3 h-3 rounded-full bg-yellow-500/70" />
               <div className="w-3 h-3 rounded-full bg-green-500/70" />
@@ -101,7 +101,7 @@ export default function LandingPage() {
                 <span className="text-purple-300">User</span>
                 <span className="ml-2 text-gray-600">importance 0.92</span>
               </div>
-              <div className="mt-4 pt-4 border-t border-gray-800 text-gray-500">
+              <div className="mt-4 pt-4 border-t border-[#222] text-gray-500">
                 <span className="text-blue-400">?</span>
                 <span className="ml-2 text-gray-300">What does </span>
                 <span className="text-green-300">create_app</span>
@@ -117,7 +117,7 @@ export default function LandingPage() {
       </section>
 
       {/* Features */}
-      <section className="relative py-24 border-t border-gray-800/50">
+      <section className="relative py-24 border-t border-[#222]/50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold mb-3">Everything you need</h2>
@@ -161,7 +161,7 @@ export default function LandingPage() {
       </section>
 
       {/* How it works */}
-      <section className="relative py-24 border-t border-gray-800/50">
+      <section className="relative py-24 border-t border-[#222]/50">
         <div className="max-w-4xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold mb-3">How it works</h2>
@@ -186,7 +186,7 @@ export default function LandingPage() {
                 desc: 'Navigate the dependency graph, read the docs, or type a question. Click any node in the graph to ask about that specific function or class.',
               },
             ].map(s => (
-              <div key={s.n} className="flex gap-5 items-start bg-gray-900/50 rounded-2xl p-6 border border-gray-800/60">
+              <div key={s.n} className="flex gap-5 items-start bg-[#111]/50 rounded-2xl p-6 border border-[#222]/60">
                 <div className={`flex-shrink-0 w-10 h-10 rounded-full ${s.color} flex items-center justify-center text-sm font-bold shadow-lg`}>
                   {s.n}
                 </div>
@@ -201,7 +201,7 @@ export default function LandingPage() {
       </section>
 
       {/* CTA */}
-      <section className="relative py-24 border-t border-gray-800/50">
+      <section className="relative py-24 border-t border-[#222]/50">
         <div className="max-w-2xl mx-auto px-6 text-center">
           <h2 className="text-4xl font-bold mb-4">Ready to explore your code?</h2>
           <p className="text-gray-400 mb-10">
@@ -217,11 +217,11 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="relative border-t border-gray-800/50 py-8">
+      <footer className="relative border-t border-[#222]/50 py-8">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-xs font-bold">
-              CL
+              G
             </div>
             <span className="text-gray-500 text-sm">Grasp</span>
           </div>

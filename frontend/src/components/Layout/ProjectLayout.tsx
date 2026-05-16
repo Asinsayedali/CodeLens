@@ -29,7 +29,7 @@ export default function ProjectLayout() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-950 text-white flex items-center justify-center">
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
         <div className="text-center">
           <div className="spinner w-10 h-10 mx-auto mb-4" />
           <p className="text-gray-400 text-sm">Loading project…</p>
@@ -42,9 +42,9 @@ export default function ProjectLayout() {
   const activeTab = tab && TABS.some(t => t.id === tab) ? tab : 'docs';
 
   return (
-    <div className="h-screen bg-gray-950 text-white flex flex-col overflow-hidden">
+    <div className="h-screen bg-black text-white flex flex-col overflow-hidden">
       {/* Header */}
-      <header className="bg-gray-950 border-b border-gray-800 px-6 py-3 flex-shrink-0">
+      <header className="bg-black border-b border-[#222] px-6 py-3 flex-shrink-0">
         <div className="flex items-center justify-between">
           {/* Breadcrumb */}
           <div className="flex items-center gap-2 min-w-0">
@@ -67,7 +67,7 @@ export default function ProjectLayout() {
                 className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-colors duration-150 ${
                   activeTab === t.id
                     ? 'bg-blue-600 text-white shadow-sm'
-                    : 'text-gray-400 hover:text-white hover:bg-gray-800'
+                    : 'text-gray-400 hover:text-white hover:bg-[#1c1c1c]'
                 }`}
                 aria-current={activeTab === t.id ? 'page' : undefined}
               >

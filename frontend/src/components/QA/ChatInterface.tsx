@@ -117,9 +117,9 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({ projectId }) => {
   };
 
   return (
-    <div className="h-full flex flex-col bg-gray-950">
+    <div className="h-full flex flex-col bg-black">
       {/* Header */}
-      <div className="bg-gray-950 border-b border-gray-800 px-6 py-3 flex-shrink-0">
+      <div className="bg-black border-b border-[#222] px-6 py-3 flex-shrink-0">
         <div className="flex items-center justify-between">
           <div>
             <h2 className="text-lg font-semibold text-white">Ask about your codebase</h2>
@@ -137,7 +137,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({ projectId }) => {
               disabled={generatingEmbeddings}
               className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-150 ${
                 embeddingsGenerated
-                  ? 'bg-gray-800 hover:bg-gray-700 active:bg-gray-600 text-gray-300 border border-gray-700'
+                  ? 'bg-[#1c1c1c] hover:bg-[#282828] active:bg-[#333] text-gray-300 border border-[#2e2e2e]'
                   : 'bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white shadow-sm'
               } disabled:opacity-50 disabled:cursor-not-allowed`}
             >
@@ -165,7 +165,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({ projectId }) => {
 
       {/* Suggestions — always visible, collapsible */}
       {suggestions.length > 0 && (
-        <div className="flex-shrink-0 border-t border-gray-800 bg-gray-950">
+        <div className="flex-shrink-0 border-t border-[#222] bg-black">
           <button
             onClick={() => setShowSuggestions(v => !v)}
             className="w-full px-6 py-2 flex items-center justify-between text-xs text-gray-500 hover:text-gray-400 transition-colors"
@@ -179,7 +179,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({ projectId }) => {
                 <button
                   key={i}
                   onClick={() => handleSuggestionClick(s)}
-                  className="flex-shrink-0 px-3 py-1.5 bg-gray-800 hover:bg-gray-700 active:bg-gray-600 border border-gray-700 hover:border-gray-600 text-gray-300 hover:text-white rounded-lg text-xs transition-colors whitespace-nowrap"
+                  className="flex-shrink-0 px-3 py-1.5 bg-[#1c1c1c] hover:bg-[#282828] active:bg-[#333] border border-[#2e2e2e] hover:border-gray-600 text-gray-300 hover:text-white rounded-lg text-xs transition-colors whitespace-nowrap"
                 >
                   {s}
                 </button>
@@ -190,7 +190,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({ projectId }) => {
       )}
 
       {/* Input */}
-      <div className="flex-shrink-0 border-t border-gray-800 bg-gray-950 px-6 py-4">
+      <div className="flex-shrink-0 border-t border-[#222] bg-black px-6 py-4">
         {!embeddingsGenerated && (
           <p className="text-xs text-amber-400/80 mb-3 flex items-center gap-1.5">
             <span>⚠</span> Index your codebase first to enable Q&amp;A
@@ -207,13 +207,13 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({ projectId }) => {
                 : 'Click "Index Codebase" above to get started...'
             }
             disabled={!embeddingsGenerated || loading}
-            className="flex-1 px-4 py-2.5 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:opacity-40 disabled:cursor-not-allowed text-sm transition-colors"
+            className="flex-1 px-4 py-2.5 bg-[#111] border border-[#2e2e2e] rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:opacity-40 disabled:cursor-not-allowed text-sm transition-colors"
             aria-label="Ask a question about your code"
           />
           <button
             type="submit"
             disabled={!input.trim() || loading || !embeddingsGenerated}
-            className="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 active:bg-blue-700 disabled:bg-gray-800 disabled:text-gray-600 disabled:cursor-not-allowed text-white rounded-lg transition-colors font-medium text-sm flex items-center gap-2 shadow-sm"
+            className="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 active:bg-blue-700 disabled:bg-[#1c1c1c] disabled:text-gray-600 disabled:cursor-not-allowed text-white rounded-lg transition-colors font-medium text-sm flex items-center gap-2 shadow-sm"
           >
             {loading ? (
               <>

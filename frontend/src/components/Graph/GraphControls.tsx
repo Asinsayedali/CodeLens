@@ -38,7 +38,7 @@ const GraphControls: React.FC<GraphControlsProps> = ({
             value={searchTerm}
             onChange={(e) => onSearchChange(e.target.value)}
             placeholder="Search nodes..."
-            className="w-full pl-7 pr-3 py-1.5 bg-gray-800/80 border border-gray-600/60 rounded-lg text-xs text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+            className="w-full pl-7 pr-3 py-1.5 bg-[#1c1c1c]/80 border border-gray-600/60 rounded-lg text-xs text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
             aria-label="Search nodes"
           />
         </div>
@@ -52,7 +52,7 @@ const GraphControls: React.FC<GraphControlsProps> = ({
         <select
           value={filterType}
           onChange={(e) => onFilterChange(e.target.value)}
-          className="w-full px-2.5 py-1.5 bg-gray-800/80 border border-gray-600/60 rounded-lg text-xs text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors cursor-pointer"
+          className="w-full px-2.5 py-1.5 bg-[#1c1c1c]/80 border border-gray-600/60 rounded-lg text-xs text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors cursor-pointer"
           aria-label="Filter by node type"
         >
           <option value="all">All Types</option>
@@ -75,7 +75,7 @@ const GraphControls: React.FC<GraphControlsProps> = ({
               className={`flex-1 py-1.5 text-xs rounded-lg border transition-all duration-150 font-medium capitalize ${
                 activeLayout === layout
                   ? 'bg-blue-600 border-blue-500 text-white shadow-sm shadow-blue-500/20'
-                  : 'bg-gray-800/80 border-gray-600/60 text-gray-400 hover:border-gray-500 hover:text-gray-200 hover:bg-gray-800'
+                  : 'bg-[#1c1c1c]/80 border-gray-600/60 text-gray-400 hover:border-gray-500 hover:text-gray-200 hover:bg-[#1c1c1c]'
               }`}
               aria-pressed={activeLayout === layout}
               aria-label={`${layout} layout`}
@@ -88,7 +88,7 @@ const GraphControls: React.FC<GraphControlsProps> = ({
 
       {/* Stats */}
       {stats && (
-        <div className="pt-2 border-t border-gray-700/50">
+        <div className="pt-2 border-t border-[#2e2e2e]/50">
           <label className="block text-[10px] font-semibold text-gray-400 uppercase tracking-wider mb-1.5">
             Stats
           </label>

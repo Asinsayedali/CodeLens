@@ -77,7 +77,7 @@ export const DocViewer: React.FC<DocViewerProps> = ({ projectId }) => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-full bg-gray-950">
+      <div className="flex items-center justify-center h-full bg-black">
         <div className="text-center">
           <div className="spinner w-10 h-10 mx-auto mb-4" />
           <p className="text-gray-400 text-sm">Loading documentation...</p>
@@ -88,7 +88,7 @@ export const DocViewer: React.FC<DocViewerProps> = ({ projectId }) => {
 
   if (error === 'not_generated' || (!documentation && !error)) {
     return (
-      <div className="flex items-center justify-center h-full bg-gray-950">
+      <div className="flex items-center justify-center h-full bg-black">
         <div className="text-center max-w-sm">
           <div className="text-5xl mb-5">📚</div>
           <h3 className="text-xl font-semibold text-white mb-2">No Documentation Yet</h3>
@@ -120,10 +120,10 @@ export const DocViewer: React.FC<DocViewerProps> = ({ projectId }) => {
   const currentContent = documentation?.[activeSection] || '';
 
   return (
-    <div className="flex h-full bg-gray-950 text-white">
+    <div className="flex h-full bg-black text-white">
       {/* Sidebar */}
-      <div className="w-56 shrink-0 bg-gray-900 border-r border-gray-800 flex flex-col">
-        <div className="px-4 py-4 border-b border-gray-800">
+      <div className="w-56 shrink-0 bg-[#111] border-r border-[#222] flex flex-col">
+        <div className="px-4 py-4 border-b border-[#222]">
           <h2 className="font-semibold text-sm text-white flex items-center gap-2">
             <span>📚</span> Documentation
           </h2>
@@ -137,7 +137,7 @@ export const DocViewer: React.FC<DocViewerProps> = ({ projectId }) => {
               className={`w-full text-left px-3 py-2.5 rounded-lg text-sm transition-colors flex items-center gap-2 ${
                 activeSection === section.key
                   ? 'bg-white text-gray-900 font-medium'
-                  : 'text-gray-400 hover:bg-gray-800 hover:text-white'
+                  : 'text-gray-400 hover:bg-[#1c1c1c] hover:text-white'
               }`}
             >
               <span className="text-base leading-none">{section.icon}</span>
@@ -146,7 +146,7 @@ export const DocViewer: React.FC<DocViewerProps> = ({ projectId }) => {
           ))}
         </nav>
 
-        <div className="p-3 border-t border-gray-800">
+        <div className="p-3 border-t border-[#222]">
           <button
             onClick={handleGenerateAll}
             disabled={generating}
@@ -176,7 +176,7 @@ export const DocViewer: React.FC<DocViewerProps> = ({ projectId }) => {
             <button
               onClick={() => handleRegenerateSection(activeSection)}
               disabled={regeneratingSection === activeSection}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-800 text-gray-300 text-xs rounded-lg border border-gray-700 hover:bg-gray-700 hover:text-white active:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#1c1c1c] text-gray-300 text-xs rounded-lg border border-[#2e2e2e] hover:bg-[#282828] hover:text-white active:bg-[#333] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               {regeneratingSection === activeSection ? (
                 <>
@@ -202,7 +202,7 @@ export const DocViewer: React.FC<DocViewerProps> = ({ projectId }) => {
             <ReactMarkdown
               components={{
                 h1: ({ ...props }) => (
-                  <h1 className="text-2xl font-bold text-white mt-8 mb-4 first:mt-0 pb-2 border-b border-gray-800" {...props} />
+                  <h1 className="text-2xl font-bold text-white mt-8 mb-4 first:mt-0 pb-2 border-b border-[#222]" {...props} />
                 ),
                 h2: ({ ...props }) => (
                   <h2 className="text-xl font-semibold text-white mt-7 mb-3" {...props} />
@@ -229,9 +229,9 @@ export const DocViewer: React.FC<DocViewerProps> = ({ projectId }) => {
                     return <MermaidDiagram chart={code} />;
                   }
                   return inline ? (
-                    <code className="bg-gray-800 text-green-400 px-1.5 py-0.5 rounded text-xs font-mono whitespace-nowrap" {...props}>{children}</code>
+                    <code className="bg-[#1c1c1c] text-green-400 px-1.5 py-0.5 rounded text-xs font-mono whitespace-nowrap" {...props}>{children}</code>
                   ) : (
-                    <code className="block bg-gray-900 border border-gray-700/60 text-gray-200 p-4 rounded-xl overflow-x-auto text-xs font-mono leading-relaxed" {...props}>{children}</code>
+                    <code className="block bg-[#111] border border-[#2e2e2e]/60 text-gray-200 p-4 rounded-xl overflow-x-auto text-xs font-mono leading-relaxed" {...props}>{children}</code>
                   );
                 },
                 pre: ({ ...props }) => (
@@ -247,18 +247,18 @@ export const DocViewer: React.FC<DocViewerProps> = ({ projectId }) => {
                   <strong className="font-semibold text-white" {...props} />
                 ),
                 hr: ({ ...props }) => (
-                  <hr className="border-gray-800 my-6" {...props} />
+                  <hr className="border-[#222] my-6" {...props} />
                 ),
                 table: ({ ...props }) => (
-                  <div className="overflow-x-auto mb-4 rounded-xl border border-gray-700/60">
+                  <div className="overflow-x-auto mb-4 rounded-xl border border-[#2e2e2e]/60">
                     <table className="min-w-full text-sm" {...props} />
                   </div>
                 ),
                 th: ({ ...props }) => (
-                  <th className="px-4 py-2.5 bg-gray-800 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider" {...props} />
+                  <th className="px-4 py-2.5 bg-[#1c1c1c] text-left text-xs font-semibold text-gray-300 uppercase tracking-wider" {...props} />
                 ),
                 td: ({ ...props }) => (
-                  <td className="px-4 py-2.5 text-gray-300 text-sm border-t border-gray-700/40" {...props} />
+                  <td className="px-4 py-2.5 text-gray-300 text-sm border-t border-[#2e2e2e]/40" {...props} />
                 ),
               }}
             >

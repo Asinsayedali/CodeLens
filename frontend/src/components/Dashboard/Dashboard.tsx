@@ -65,9 +65,9 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-950 text-white flex flex-col">
+    <div className="min-h-screen bg-black text-white flex flex-col">
       {/* Header */}
-      <header className="bg-gray-950 border-b border-gray-800 px-6 py-3 flex-shrink-0">
+      <header className="bg-black border-b border-[#222] px-6 py-3 flex-shrink-0">
         <div className="max-w-5xl mx-auto flex items-center justify-between">
           <Link to="/" className="text-lg font-bold tracking-tight text-gradient-primary hover:opacity-80 transition-opacity">
             Grasp
@@ -94,7 +94,7 @@ export default function Dashboard() {
 
           {/* New project form */}
           {showNewProjectForm && (
-            <div className="bg-gray-900 border border-gray-800 rounded-xl p-6">
+            <div className="bg-[#111] border border-[#222] rounded-xl p-6">
               <h3 className="text-base font-semibold mb-4 text-white">Analyse a Repository</h3>
               <form onSubmit={handleAnalyzeRepository} className="space-y-4">
                 <div>
@@ -106,7 +106,7 @@ export default function Dashboard() {
                     value={newProjectPath}
                     onChange={e => setNewProjectPath(e.target.value)}
                     placeholder="/path/to/repo  or  https://github.com/user/repo"
-                    className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm transition-colors"
+                    className="w-full px-3 py-2 bg-[#1c1c1c] border border-[#2e2e2e] rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm transition-colors"
                     required
                   />
                 </div>
@@ -119,7 +119,7 @@ export default function Dashboard() {
                     value={newProjectName}
                     onChange={e => setNewProjectName(e.target.value)}
                     placeholder="My Project"
-                    className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm transition-colors"
+                    className="w-full px-3 py-2 bg-[#1c1c1c] border border-[#2e2e2e] rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm transition-colors"
                   />
                 </div>
                 {error && <p className="text-red-400 text-xs">{error}</p>}
@@ -139,7 +139,7 @@ export default function Dashboard() {
                   <button
                     type="button"
                     onClick={() => setShowNewProjectForm(false)}
-                    className="px-4 py-2 bg-gray-800 hover:bg-gray-700 active:bg-gray-600 text-gray-300 hover:text-white rounded-lg text-sm font-medium transition-colors"
+                    className="px-4 py-2 bg-[#1c1c1c] hover:bg-[#282828] active:bg-[#333] text-gray-300 hover:text-white rounded-lg text-sm font-medium transition-colors"
                   >
                     Cancel
                   </button>
@@ -161,7 +161,7 @@ export default function Dashboard() {
             </div>
           ) : projects.length === 0 ? (
             <div className="text-center py-20">
-              <div className="w-16 h-16 rounded-2xl bg-gray-900 border border-gray-800 flex items-center justify-center mx-auto mb-4 text-2xl">
+              <div className="w-16 h-16 rounded-2xl bg-[#111] border border-[#222] flex items-center justify-center mx-auto mb-4 text-2xl">
                 📂
               </div>
               <p className="text-gray-400 font-medium">No projects yet</p>
@@ -172,7 +172,7 @@ export default function Dashboard() {
               {projects.map(project => (
                 <div
                   key={project.id}
-                  className="group bg-gray-900 border border-gray-800 hover:border-blue-500/50 hover:shadow-lg hover:shadow-blue-500/10 rounded-xl p-5 transition-all duration-200 cursor-pointer"
+                  className="group bg-[#111] border border-[#222] hover:border-blue-500/50 hover:shadow-lg hover:shadow-blue-500/10 rounded-xl p-5 transition-all duration-200 cursor-pointer"
                   onClick={() => navigate(`/projects/${project.id}/docs`)}
                 >
                   {/* Card header */}
@@ -184,7 +184,7 @@ export default function Dashboard() {
                       project.status === 'completed' ? 'bg-green-500/10 text-green-400 border border-green-500/20' :
                       project.status === 'analyzing' ? 'bg-yellow-500/10 text-yellow-400 border border-yellow-500/20' :
                       project.status === 'failed'    ? 'bg-red-500/10 text-red-400 border border-red-500/20' :
-                      'bg-gray-800 text-gray-500 border border-gray-700'
+                      'bg-[#1c1c1c] text-gray-500 border border-[#2e2e2e]'
                     }`}>
                       {project.status}
                     </span>
@@ -213,9 +213,9 @@ export default function Dashboard() {
                   </div>
 
                   {/* Footer row */}
-                  <div className="mt-4 pt-3 border-t border-gray-800 flex items-center gap-1.5">
+                  <div className="mt-4 pt-3 border-t border-[#222] flex items-center gap-1.5">
                     {['docs', 'graph', 'qa'].map(tab => (
-                      <span key={tab} className="text-[10px] text-gray-600 bg-gray-800 px-2 py-0.5 rounded-full capitalize">
+                      <span key={tab} className="text-[10px] text-gray-600 bg-[#1c1c1c] px-2 py-0.5 rounded-full capitalize">
                         {tab === 'qa' ? 'Q&A' : tab}
                       </span>
                     ))}
@@ -248,7 +248,7 @@ export default function Dashboard() {
       {/* Delete confirmation modal */}
       {projectToDelete && (
         <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
-          <div className="bg-gray-900 border border-gray-800 rounded-xl p-6 max-w-md w-full shadow-2xl">
+          <div className="bg-[#111] border border-[#222] rounded-xl p-6 max-w-md w-full shadow-2xl">
             <h3 className="text-lg font-semibold text-white mb-2">Delete Project</h3>
             <p className="text-gray-400 text-sm mb-6">
               Are you sure you want to delete{' '}
@@ -259,7 +259,7 @@ export default function Dashboard() {
               <button
                 onClick={() => setProjectToDelete(null)}
                 disabled={deletingProjectId !== null}
-                className="flex-1 px-4 py-2 bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-white rounded-lg text-sm font-medium transition-colors disabled:opacity-50"
+                className="flex-1 px-4 py-2 bg-[#1c1c1c] hover:bg-[#282828] text-gray-300 hover:text-white rounded-lg text-sm font-medium transition-colors disabled:opacity-50"
               >
                 Cancel
               </button>

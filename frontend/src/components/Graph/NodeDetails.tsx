@@ -59,7 +59,7 @@ function inlineFmt(text: string): React.ReactNode {
     if (part.startsWith('**') && part.endsWith('**'))
       return <strong key={i} className="text-white font-semibold">{part.slice(2, -2)}</strong>;
     if (part.startsWith('`') && part.endsWith('`'))
-      return <code key={i} className="text-green-400 bg-gray-950 px-1 rounded text-[10px] font-mono">{part.slice(1, -1)}</code>;
+      return <code key={i} className="text-green-400 bg-black px-1 rounded text-[10px] font-mono">{part.slice(1, -1)}</code>;
     return part;
   });
 }
@@ -159,7 +159,7 @@ const NodeDetails: React.FC<NodeDetailsProps> = ({ projectId, node, onClose }) =
   return (
     <div className="flex flex-col h-full">
       {/* Header */}
-      <div className="flex items-start justify-between p-4 border-b border-gray-700/60 gap-2 flex-shrink-0">
+      <div className="flex items-start justify-between p-4 border-b border-[#2e2e2e]/60 gap-2 flex-shrink-0">
         <div className="flex-1 min-w-0">
           <span className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-medium border mb-1.5 ${typeStyle.badge}`}>
             {typeIcon} {node.data.type}
@@ -175,7 +175,7 @@ const NodeDetails: React.FC<NodeDetailsProps> = ({ projectId, node, onClose }) =
         </div>
         <button
           onClick={onClose}
-          className="shrink-0 w-6 h-6 flex items-center justify-center rounded-full text-gray-500 hover:text-white hover:bg-gray-700 transition-all text-xs mt-0.5"
+          className="shrink-0 w-6 h-6 flex items-center justify-center rounded-full text-gray-500 hover:text-white hover:bg-[#282828] transition-all text-xs mt-0.5"
         >
           ✕
         </button>
@@ -215,7 +215,7 @@ const NodeDetails: React.FC<NodeDetailsProps> = ({ projectId, node, onClose }) =
                       <span className="text-gray-500">Importance</span>
                       <span className="text-gray-200 font-mono">{node.data.importance_score.toFixed(2)}</span>
                     </div>
-                    <div className="w-full bg-gray-700/60 rounded-full h-1">
+                    <div className="w-full bg-[#282828]/60 rounded-full h-1">
                       <div
                         className="bg-blue-500 h-1 rounded-full"
                         style={{ width: `${Math.min(node.data.importance_score * 100, 100)}%` }}
@@ -232,20 +232,20 @@ const NodeDetails: React.FC<NodeDetailsProps> = ({ projectId, node, onClose }) =
                 <div className="flex items-center gap-2 mb-2.5">
                   <div className="w-1.5 h-1.5 rounded-full bg-orange-400 shrink-0" />
                   <span className="font-semibold text-xs text-white">Incoming</span>
-                  <span className="ml-auto text-[10px] text-gray-500 bg-gray-800 px-1.5 py-0.5 rounded-full">
+                  <span className="ml-auto text-[10px] text-gray-500 bg-[#1c1c1c] px-1.5 py-0.5 rounded-full">
                     {details.incoming_edges.length}
                   </span>
                 </div>
                 {details.incoming_edges.length > 0 ? (
                   <div className="space-y-1">
                     {(showAllIncoming ? details.incoming_edges : details.incoming_edges.slice(0, PREVIEW_COUNT)).map((edge, i) => (
-                      <div key={i} className="flex items-center gap-2 py-1 px-2 rounded bg-gray-800/50 text-xs">
+                      <div key={i} className="flex items-center gap-2 py-1 px-2 rounded bg-[#1c1c1c]/50 text-xs">
                         <span className="text-orange-400 font-medium shrink-0">{edge.edge_type}</span>
                         <span className="text-gray-300 truncate">{edge.source_node_id.split(':').pop()}</span>
                       </div>
                     ))}
                     {details.incoming_edges.length > PREVIEW_COUNT && (
-                      <button onClick={() => setShowAllIncoming(v => !v)} className="w-full text-left text-xs text-blue-400 hover:text-blue-300 py-1.5 px-2 hover:bg-gray-800/40 rounded transition-colors">
+                      <button onClick={() => setShowAllIncoming(v => !v)} className="w-full text-left text-xs text-blue-400 hover:text-blue-300 py-1.5 px-2 hover:bg-[#1c1c1c]/40 rounded transition-colors">
                         {showAllIncoming ? '▲ Show less' : `▼ Show ${details.incoming_edges.length - PREVIEW_COUNT} more`}
                       </button>
                     )}
@@ -260,20 +260,20 @@ const NodeDetails: React.FC<NodeDetailsProps> = ({ projectId, node, onClose }) =
                 <div className="flex items-center gap-2 mb-2.5">
                   <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0" />
                   <span className="font-semibold text-xs text-white">Outgoing</span>
-                  <span className="ml-auto text-[10px] text-gray-500 bg-gray-800 px-1.5 py-0.5 rounded-full">
+                  <span className="ml-auto text-[10px] text-gray-500 bg-[#1c1c1c] px-1.5 py-0.5 rounded-full">
                     {details.outgoing_edges.length}
                   </span>
                 </div>
                 {details.outgoing_edges.length > 0 ? (
                   <div className="space-y-1">
                     {(showAllOutgoing ? details.outgoing_edges : details.outgoing_edges.slice(0, PREVIEW_COUNT)).map((edge, i) => (
-                      <div key={i} className="flex items-center gap-2 py-1 px-2 rounded bg-gray-800/50 text-xs">
+                      <div key={i} className="flex items-center gap-2 py-1 px-2 rounded bg-[#1c1c1c]/50 text-xs">
                         <span className="text-cyan-400 font-medium shrink-0">{edge.edge_type}</span>
                         <span className="text-gray-300 truncate">{edge.target_node_id.split(':').pop()}</span>
                       </div>
                     ))}
                     {details.outgoing_edges.length > PREVIEW_COUNT && (
-                      <button onClick={() => setShowAllOutgoing(v => !v)} className="w-full text-left text-xs text-blue-400 hover:text-blue-300 py-1.5 px-2 hover:bg-gray-800/40 rounded transition-colors">
+                      <button onClick={() => setShowAllOutgoing(v => !v)} className="w-full text-left text-xs text-blue-400 hover:text-blue-300 py-1.5 px-2 hover:bg-[#1c1c1c]/40 rounded transition-colors">
                         {showAllOutgoing ? '▲ Show less' : `▼ Show ${details.outgoing_edges.length - PREVIEW_COUNT} more`}
                       </button>
                     )}
@@ -288,20 +288,20 @@ const NodeDetails: React.FC<NodeDetailsProps> = ({ projectId, node, onClose }) =
                 <div className="flex items-center gap-2 mb-2.5">
                   <div className="w-1.5 h-1.5 rounded-full bg-purple-400 shrink-0" />
                   <span className="font-semibold text-xs text-white">Related</span>
-                  <span className="ml-auto text-[10px] text-gray-500 bg-gray-800 px-1.5 py-0.5 rounded-full">
+                  <span className="ml-auto text-[10px] text-gray-500 bg-[#1c1c1c] px-1.5 py-0.5 rounded-full">
                     {details.related_nodes.length}
                   </span>
                 </div>
                 {details.related_nodes.length > 0 ? (
                   <div className="space-y-1">
                     {(showAllRelated ? details.related_nodes : details.related_nodes.slice(0, PREVIEW_COUNT)).map((rn, i) => (
-                      <div key={i} className="flex items-center gap-2 py-1 px-2 rounded bg-gray-800/50 text-xs">
+                      <div key={i} className="flex items-center gap-2 py-1 px-2 rounded bg-[#1c1c1c]/50 text-xs">
                         <span className={`font-medium shrink-0 capitalize ${relatedTypeColor(rn.node_type)}`}>{rn.node_type}</span>
                         <span className="text-gray-300 truncate">{rn.name}</span>
                       </div>
                     ))}
                     {details.related_nodes.length > PREVIEW_COUNT && (
-                      <button onClick={() => setShowAllRelated(v => !v)} className="w-full text-left text-xs text-blue-400 hover:text-blue-300 py-1.5 px-2 hover:bg-gray-800/40 rounded transition-colors">
+                      <button onClick={() => setShowAllRelated(v => !v)} className="w-full text-left text-xs text-blue-400 hover:text-blue-300 py-1.5 px-2 hover:bg-[#1c1c1c]/40 rounded transition-colors">
                         {showAllRelated ? '▲ Show less' : `▼ Show ${details.related_nodes.length - PREVIEW_COUNT} more`}
                       </button>
                     )}
@@ -324,7 +324,7 @@ const NodeDetails: React.FC<NodeDetailsProps> = ({ projectId, node, onClose }) =
                     <button
                       key={i}
                       onClick={() => setQaInput(q)}
-                      className="text-[10px] px-2 py-1 bg-gray-800 hover:bg-gray-700 border border-gray-700 hover:border-gray-600 text-gray-400 hover:text-gray-200 rounded-lg transition-all text-left"
+                      className="text-[10px] px-2 py-1 bg-[#1c1c1c] hover:bg-[#282828] border border-[#2e2e2e] hover:border-gray-600 text-gray-400 hover:text-gray-200 rounded-lg transition-all text-left"
                     >
                       {q}
                     </button>
@@ -344,14 +344,14 @@ const NodeDetails: React.FC<NodeDetailsProps> = ({ projectId, node, onClose }) =
                           </div>
                         </div>
                       ) : (
-                        <div className="bg-gray-800/80 border border-gray-700/60 rounded-xl rounded-tl-sm px-3 py-2.5 space-y-1">
+                        <div className="bg-[#1c1c1c]/80 border border-[#2e2e2e]/60 rounded-xl rounded-tl-sm px-3 py-2.5 space-y-1">
                           {renderAnswer(msg.text)}
                         </div>
                       )}
                     </div>
                   ))}
                   {qaLoading && (
-                    <div className="flex gap-1 px-3 py-2.5 bg-gray-800/80 border border-gray-700/60 rounded-xl rounded-tl-sm w-fit">
+                    <div className="flex gap-1 px-3 py-2.5 bg-[#1c1c1c]/80 border border-[#2e2e2e]/60 rounded-xl rounded-tl-sm w-fit">
                       {[0, 150, 300].map(d => (
                         <div key={d} className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: `${d}ms` }} />
                       ))}
@@ -365,7 +365,7 @@ const NodeDetails: React.FC<NodeDetailsProps> = ({ projectId, node, onClose }) =
               {filesUsed.length > 0 && (
                 <div className="mb-2 flex flex-wrap gap-1">
                   {filesUsed.map((f, i) => (
-                    <span key={i} className="text-[9px] text-gray-600 bg-gray-900 border border-gray-800 px-1.5 py-0.5 rounded font-mono truncate max-w-full">
+                    <span key={i} className="text-[9px] text-gray-600 bg-[#111] border border-[#222] px-1.5 py-0.5 rounded font-mono truncate max-w-full">
                       {f}
                     </span>
                   ))}
@@ -381,12 +381,12 @@ const NodeDetails: React.FC<NodeDetailsProps> = ({ projectId, node, onClose }) =
                   onChange={e => setQaInput(e.target.value)}
                   placeholder={`Ask about ${node.data.label}...`}
                   disabled={qaLoading}
-                  className="flex-1 px-2.5 py-1.5 bg-gray-900 border border-gray-700 rounded-lg text-xs text-white placeholder-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:opacity-50 min-w-0"
+                  className="flex-1 px-2.5 py-1.5 bg-[#111] border border-[#2e2e2e] rounded-lg text-xs text-white placeholder-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:opacity-50 min-w-0"
                 />
                 <button
                   type="submit"
                   disabled={!qaInput.trim() || qaLoading}
-                  className="px-2.5 py-1.5 bg-blue-600 hover:bg-blue-500 disabled:bg-gray-800 disabled:text-gray-600 text-white rounded-lg text-xs font-medium transition-colors shrink-0"
+                  className="px-2.5 py-1.5 bg-blue-600 hover:bg-blue-500 disabled:bg-[#1c1c1c] disabled:text-gray-600 text-white rounded-lg text-xs font-medium transition-colors shrink-0"
                 >
                   {qaLoading ? '…' : 'Ask'}
                 </button>

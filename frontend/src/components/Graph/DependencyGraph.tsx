@@ -106,7 +106,7 @@ const DependencyGraph: React.FC<DependencyGraphProps> = ({ projectId }) => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-full bg-gray-950">
+      <div className="flex items-center justify-center h-full bg-black">
         <div className="text-center">
           <div className="spinner w-12 h-12 mx-auto" />
           <p className="mt-4 text-gray-400 text-sm">Loading dependency graph...</p>
@@ -117,7 +117,7 @@ const DependencyGraph: React.FC<DependencyGraphProps> = ({ projectId }) => {
 
   if (error) {
     return (
-      <div className="flex items-center justify-center h-full bg-gray-950">
+      <div className="flex items-center justify-center h-full bg-black">
         <div className="text-center max-w-md px-6">
           <div className="w-16 h-16 rounded-2xl bg-red-500/10 border border-red-500/20 flex items-center justify-center mx-auto mb-4 text-2xl">
             ⚠️
@@ -148,13 +148,13 @@ const DependencyGraph: React.FC<DependencyGraphProps> = ({ projectId }) => {
         nodeTypes={nodeTypes}
         fitView
         attributionPosition="bottom-left"
-        className="bg-gray-950"
+        className="bg-black"
         defaultEdgeOptions={{
           style: { stroke: 'var(--color-gray-700)', strokeWidth: 1 },
         }}
       >
         <Background variant={BackgroundVariant.Dots} gap={16} size={1} color="var(--color-gray-800)" />
-        <Controls className="!bg-gray-900 !border-gray-700 !shadow-lg [&_button]:transition-colors [&_button:hover]:bg-gray-800" />
+        <Controls className="!bg-[#111] !border-[#2e2e2e] !shadow-lg [&_button]:transition-colors [&_button:hover]:bg-[#1c1c1c]" />
         <MiniMap
           nodeColor={(node) => {
             switch (node.type) {
@@ -201,7 +201,7 @@ const DependencyGraph: React.FC<DependencyGraphProps> = ({ projectId }) => {
               ))}
             </div>
             {selectedNode && (
-              <div className="mt-3 pt-2.5 border-t border-gray-700/50 space-y-1.5">
+              <div className="mt-3 pt-2.5 border-t border-[#2e2e2e]/50 space-y-1.5">
                 <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Edges</p>
                 <div className="flex items-center gap-2">
                   <div className="w-4 h-0.5 bg-cyan-400 rounded" />

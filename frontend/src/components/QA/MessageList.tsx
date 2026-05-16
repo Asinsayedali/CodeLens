@@ -78,7 +78,7 @@ function inlineFormat(text: string): React.ReactNode {
     if (part.startsWith('*') && part.endsWith('*'))
       return <em key={i} className="text-gray-200 italic">{part.slice(1, -1)}</em>;
     if (part.startsWith('`') && part.endsWith('`'))
-      return <code key={i} className="text-green-400 bg-gray-900 px-1 py-0.5 rounded text-xs font-mono">{part.slice(1, -1)}</code>;
+      return <code key={i} className="text-green-400 bg-[#111] px-1 py-0.5 rounded text-xs font-mono">{part.slice(1, -1)}</code>;
     return part;
   });
 }
@@ -94,9 +94,9 @@ function renderContent(content: string): React.ReactNode {
           const lang = lines[0].replace('```', '').trim();
           const code = lines.slice(1, -1).join('\n');
           return (
-            <div key={i} className="rounded-lg overflow-hidden bg-gray-950 border border-gray-800 my-2">
+            <div key={i} className="rounded-lg overflow-hidden bg-black border border-[#222] my-2">
               {lang && (
-                <div className="px-3 py-1 bg-gray-900 border-b border-gray-800 text-xs text-gray-500 font-mono">
+                <div className="px-3 py-1 bg-[#111] border-b border-[#222] text-xs text-gray-500 font-mono">
                   {lang}
                 </div>
               )}
@@ -112,10 +112,10 @@ function renderContent(content: string): React.ReactNode {
 
 export const MessageList: React.FC<MessageListProps> = ({ messages, loading }) => {
   return (
-    <div className="flex-1 overflow-y-auto px-6 py-6 space-y-4 bg-gray-950">
+    <div className="flex-1 overflow-y-auto px-6 py-6 space-y-4 bg-black">
       {messages.length === 0 && !loading ? (
         <div className="flex flex-col items-center justify-center h-full text-center">
-          <div className="w-16 h-16 rounded-2xl bg-gray-900 border border-gray-800 flex items-center justify-center mb-4 text-2xl">
+          <div className="w-16 h-16 rounded-2xl bg-[#111] border border-[#222] flex items-center justify-center mb-4 text-2xl">
             💬
           </div>
           <p className="text-gray-400 font-medium">No conversation yet</p>
@@ -135,14 +135,14 @@ export const MessageList: React.FC<MessageListProps> = ({ messages, loading }) =
             ) : (
               /* AI answer */
               <div className="max-w-[85%] space-y-3" role="article" aria-label="AI response">
-                <div className="bg-gray-900 border border-gray-800 rounded-2xl rounded-tl-sm px-5 py-4 shadow-lg">
+                <div className="bg-[#111] border border-[#222] rounded-2xl rounded-tl-sm px-5 py-4 shadow-lg">
                   {renderContent(message.content)}
 
                   {/* Confidence bar */}
                   {message.confidence !== undefined && message.confidence > 0 && (
-                    <div className="flex items-center gap-2 mt-4 pt-3 border-t border-gray-800">
+                    <div className="flex items-center gap-2 mt-4 pt-3 border-t border-[#222]">
                       <span className="text-xs text-gray-600">Relevance</span>
-                      <div className="flex-1 bg-gray-800 rounded-full h-1 max-w-[120px]">
+                      <div className="flex-1 bg-[#1c1c1c] rounded-full h-1 max-w-[120px]">
                         <div
                           className={`h-1 rounded-full transition-all ${
                             message.confidence > 0.7 ? 'bg-green-500' :
@@ -170,8 +170,8 @@ export const MessageList: React.FC<MessageListProps> = ({ messages, loading }) =
                     </summary>
                     <div className="mt-2 space-y-2">
                       {message.codeSnippets.map((snippet, idx) => (
-                        <div key={idx} className="bg-gray-900 border border-gray-800 rounded-lg overflow-hidden">
-                          <div className="bg-gray-950 px-3 py-1.5 flex items-center justify-between border-b border-gray-800">
+                        <div key={idx} className="bg-[#111] border border-[#222] rounded-lg overflow-hidden">
+                          <div className="bg-black px-3 py-1.5 flex items-center justify-between border-b border-[#222]">
                             <span className="text-xs text-blue-400 font-mono truncate max-w-[80%]">
                               {snippet.file_path}
                             </span>
@@ -195,7 +195,7 @@ export const MessageList: React.FC<MessageListProps> = ({ messages, loading }) =
 
       {loading && (
         <div className="flex justify-start">
-          <div className="bg-gray-900 border border-gray-800 rounded-2xl rounded-tl-sm px-5 py-4 shadow-lg">
+          <div className="bg-[#111] border border-[#222] rounded-2xl rounded-tl-sm px-5 py-4 shadow-lg">
             <div className="flex items-center gap-2">
               <div className="flex gap-1">
                 {[0, 150, 300].map(delay => (
