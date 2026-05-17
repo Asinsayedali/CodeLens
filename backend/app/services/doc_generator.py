@@ -148,17 +148,55 @@ Write the following sections and NOTHING else:
 
     @staticmethod
     def architecture_diagram(project_data: Dict[str, Any]) -> str:
-        return f"""Generate a software architecture description in markdown format.
+        return f"""Generate detailed software architecture documentation for this code repository.
 
 Project: {project_data.get('name', 'Unknown')}
-Components: {json.dumps(project_data.get('components', []), indent=2)}
-Dependencies: {json.dumps(project_data.get('dependency_graph', {}), indent=2)}
+Primary Language: {project_data.get('primary_language', 'Unknown')}
+Total Files: {project_data.get('total_files', 0)} | Lines: {project_data.get('total_lines', 0):,}
 
-Write the following sections and NOTHING else:
-## Architecture Overview
-## Components
-## Data Flow
-## Design Patterns
+Detected Technology Stack:
+{json.dumps(project_data.get('tech_stack', {}), indent=2)}
+
+Module Structure (top-level directories and their contents):
+{json.dumps(project_data.get('module_tree', {}), indent=2)}
+
+Key Functions and Classes (with call relationships):
+{json.dumps(project_data.get('key_flows', []), indent=2)}
+
+Write EXACTLY these three sections and nothing else:
+
+## 🏗️ Architecture Summary
+
+Write 3-4 paragraphs:
+1. What the project is and what it does overall (infer from the name, structure, and symbols)
+2. Primary language and any secondary languages used
+3. Tech stack with sub-bullets for: Frontend, Backend, Database, Testing (write "Not applicable" if absent)
+4. The overall architecture pattern (monolithic, microservices, layered, modular, etc.) and the most important dependencies
+
+## 📦 Module Breakdown
+
+For EACH directory listed in the module structure write:
+
+**<directory_name>**: <one sentence describing the purpose of this module>
+- <2-4 bullets about key files, classes, or functions inside it>
+
+End with a paragraph explaining how these modules relate to and depend on each other.
+
+## 🔄 Key Flows
+
+Pick 2-3 of the most important workflows in the system. For each one write:
+
+**<Descriptive Flow Name>**
+
+Description: <plain English description of what this flow does and why it matters>
+
+Step-by-step:
+1. <step>
+2. <step>
+3. <step>
+
+Key Files/Functions: <comma-separated list>
+
 {_PROMPT_FOOTER}"""
 
 
@@ -212,16 +250,115 @@ class DocGenerator:
 
     def generate_architecture_docs(self, project: Project) -> str:
         mermaid = self._generate_mermaid_diagram(project)
-        project_data = {
-            'name': project.name,
-            'components': self._identify_components(project),
-            'dependency_graph': self._get_dependency_summary(project),
-        }
+        project_data = self._get_rich_architecture_context(project)
         prompt = self.templates.architecture_diagram(project_data)
-        text = self._chat(prompt, max_tokens=800)
+        text = self._chat(prompt, max_tokens=2048)
         if mermaid:
             return f"```mermaid\n{mermaid}\n```\n\n{text}"
         return text
+
+    def _get_rich_architecture_context(self, project: Project) -> Dict[str, Any]:
+        """Build comprehensive context for architecture documentation."""
+        # --- Module tree: top-level dir → file count, subdirs, key symbols ---
+        module_tree: Dict[str, Any] = {}
+        for node in project.graph_nodes:
+            if not node.file_path:
+                continue
+            parts = Path(node.file_path).parts
+            top = parts[0] if len(parts) > 1 else '__root__'
+            if top not in module_tree:
+                module_tree[top] = {'files': set(), 'symbols': [], 'subdirs': set()}
+            module_tree[top]['files'].add(node.file_path)
+            if node.node_type in ('class', 'function', 'method') and node.name:
+                module_tree[top]['symbols'].append(node.name)
+            if len(parts) > 2:
+                module_tree[top]['subdirs'].add(parts[1])
+
+        module_tree_clean = {}
+        for name, data in sorted(module_tree.items()):
+            unique_symbols = list(dict.fromkeys(data['symbols']))[:8]
+            module_tree_clean[name] = {
+                'file_count': len(data['files']),
+                'subdirectories': sorted(data['subdirs'])[:6],
+                'key_symbols': unique_symbols,
+            }
+
+        # --- Tech stack detection ---
+        file_paths_str = ' '.join(n.file_path for n in project.graph_nodes if n.file_path).lower()
+        all_symbols = [n.name for n in project.graph_nodes if n.name]
+
+        tech_stack: Dict[str, List[str]] = {'frontend': [], 'backend': [], 'database': [], 'testing': [], 'infrastructure': []}
+
+        _add = lambda cat, val: tech_stack[cat].append(val) if val not in tech_stack[cat] else None
+
+        if any(e in file_paths_str for e in ['.tsx', '.jsx']): _add('frontend', 'React')
+        if 'vue' in file_paths_str: _add('frontend', 'Vue')
+        if '.ts' in file_paths_str or '.tsx' in file_paths_str: _add('frontend', 'TypeScript')
+        if '.swift' in file_paths_str: _add('frontend', 'SwiftUI')
+
+        if 'fastapi' in file_paths_str or any('FastAPI' == s for s in all_symbols): _add('backend', 'FastAPI')
+        if 'flask' in file_paths_str: _add('backend', 'Flask')
+        if 'django' in file_paths_str: _add('backend', 'Django')
+        if 'express' in file_paths_str: _add('backend', 'Express.js')
+        if 'uvicorn' in file_paths_str: _add('backend', 'Uvicorn')
+        if project.language == 'python': _add('backend', 'Python')
+        if 'package.json' in file_paths_str and project.language != 'python': _add('backend', 'Node.js')
+
+        if 'sqlite' in file_paths_str or 'sqlalchemy' in file_paths_str: _add('database', 'SQLite / SQLAlchemy')
+        if 'postgres' in file_paths_str or 'psycopg' in file_paths_str: _add('database', 'PostgreSQL')
+        if 'mongodb' in file_paths_str or 'pymongo' in file_paths_str: _add('database', 'MongoDB')
+        if 'redis' in file_paths_str: _add('database', 'Redis')
+
+        if 'pytest' in file_paths_str or any('test_' in s for s in all_symbols): _add('testing', 'pytest')
+        if 'jest' in file_paths_str: _add('testing', 'Jest')
+        if 'mocha' in file_paths_str: _add('testing', 'Mocha')
+        if 'playwright' in file_paths_str: _add('testing', 'Playwright')
+
+        if 'dockerfile' in file_paths_str: _add('infrastructure', 'Docker')
+        if '.github' in file_paths_str: _add('infrastructure', 'GitHub Actions')
+
+        # --- Key flows: top functions by importance + their call edges ---
+        node_map = {n.node_id: n for n in project.graph_nodes}
+        top_funcs = sorted(
+            [n for n in project.graph_nodes if n.node_type in ('function', 'method') and (n.importance_score or 0) > 0],
+            key=lambda x: x.importance_score or 0, reverse=True
+        )[:15]
+
+        key_flows = []
+        seen_files: set = set()
+        for fn in top_funcs:
+            if len(key_flows) >= 3:
+                break
+            if fn.file_path in seen_files:
+                continue
+            calls = [
+                f"{node_map[e.target_node_id].name} ({node_map[e.target_node_id].node_type})"
+                for e in project.graph_edges
+                if e.source_node_id == fn.node_id and e.target_node_id in node_map
+            ][:5]
+            callers = [
+                f"{node_map[e.source_node_id].name} ({node_map[e.source_node_id].node_type})"
+                for e in project.graph_edges
+                if e.target_node_id == fn.node_id and e.source_node_id in node_map
+            ][:3]
+            if calls or callers:
+                key_flows.append({
+                    'function': fn.name,
+                    'file': fn.file_path,
+                    'called_by': callers,
+                    'calls': calls,
+                })
+                seen_files.add(fn.file_path)
+
+        return {
+            'name': project.name,
+            'primary_language': project.language or 'Unknown',
+            'total_files': project.total_files or 0,
+            'total_lines': project.total_lines or 0,
+            'module_tree': module_tree_clean,
+            'tech_stack': {k: v for k, v in tech_stack.items() if v},
+            'key_flows': key_flows,
+        }
 
     def _generate_mermaid_diagram(self, project: Project) -> str:
         """Build a Mermaid flowchart directly from graph nodes and edges — no LLM needed."""
